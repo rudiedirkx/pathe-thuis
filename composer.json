@@ -1,0 +1,23 @@
+{
+    "name": "rdx/pathe-thuis",
+    "type": "project",
+    "require": {
+        "rdx/db": "^1.20",
+        "rdx/js-dom": "^1.2",
+        "guzzlehttp/guzzle": "^7.4"
+    },
+    "autoload": {
+        "files": [
+            "inc.functions.php"
+        ],
+        "psr-4": {
+            "rdx\\pathethuis\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Rudie Dirkx",
+            "email": "github@hotblocks.nl"
+        }
+    ]
+}

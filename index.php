@@ -43,7 +43,7 @@ Movie::eager('last_price', $movies);
 		<tr>
 			<th>Name</th>
 			<th>ID</th>
-			<th>Price</th>
+			<th data-sort>Price</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -51,7 +51,7 @@ Movie::eager('last_price', $movies);
 			<tr>
 				<td><?= html($movie->name) ?></td>
 				<td><a href="<?= $movie->full_url ?>"><?= html($movie->pathe_id) ?></a></td>
-				<td><?= $movie->last_price->price ?? '' ?></td>
+				<td data-value="<?= str_pad(($movie->last_price->price ?? 99) * 100, 4, '0', STR_PAD_LEFT) ?>"><?= $movie->last_price->price ?? '' ?></td>
 			</tr>
 		<? endforeach ?>
 	</tbody>
@@ -67,6 +67,14 @@ Movie::eager('last_price', $movies);
 	</fieldset>
 </form>
 
+<script>
+document.querySelector('[data-sort]').addEventListener('click', function(e) {
+	const ci = this.cellIndex;
+	const tbody = this.closest('table').querySelector('tbody');
+	const rows = [...tbody.rows].sort((a, b) => a.cells[ci].dataset.value < b.cells[ci].dataset.value ? -1 : 1);
+	rows.forEach(tr => tbody.append(tr));
+});
+</script>
 <?php
 
 require 'tpl.footer.php';

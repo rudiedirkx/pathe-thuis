@@ -33,7 +33,7 @@ if (isset($_POST['source'])) {
 
 require 'tpl.header.php';
 
-Movie::eager('last_price', $movies);
+Movie::eager('prices', $movies);
 
 ?>
 <h1>Movies</h1>
@@ -51,7 +51,16 @@ Movie::eager('last_price', $movies);
 			<tr>
 				<td><?= html($movie->name) ?></td>
 				<td><a href="<?= $movie->full_url ?>"><?= html($movie->pathe_id) ?></a></td>
-				<td data-value="<?= str_pad(($movie->last_price->price ?? 99) * 100, 4, '0', STR_PAD_LEFT) ?>"><?= $movie->last_price->price ?? '' ?></td>
+				<td class="prices" data-value="<?= (array_values($movie->prices)[0]->price ?? 99) * 100 + 1000 ?>">
+					<? foreach (array_values($movie->prices) as $i => $price): ?>
+						<? if ($i == 0): ?>
+							<span class="current"><?= html_price(round($price->price)) ?></span>
+						<? else: ?>
+							<?= $i ? ' &lt;' : '' ?>
+							<?= html_price(round($price->price)) ?>
+						<? endif ?>
+					<? endforeach ?>
+				</td>
 			</tr>
 		<? endforeach ?>
 	</tbody>

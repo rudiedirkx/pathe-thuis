@@ -16,6 +16,7 @@ header('Content-type: text/html; charset=utf-8');
 	html {
 		font-family: sans-serif;
 	}
+
 	table {
 		border-spacing: 0;
 	}
@@ -26,6 +27,11 @@ header('Content-type: text/html; charset=utf-8');
 	th {
 		text-align: left;
 		border-bottom: solid 2px #000;
+	}
+
+	.prices .current {
+		font-weight: bold;
+		color: green;
 	}
 	</style>
 </head>

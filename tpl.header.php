@@ -29,7 +29,7 @@ header('Content-type: text/html; charset=utf-8');
 		border-bottom: solid 2px #000;
 	}
 
-	.prices .current {
+	.prices .discount {
 		font-weight: bold;
 		color: green;
 	}

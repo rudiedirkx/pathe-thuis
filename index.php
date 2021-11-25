@@ -47,14 +47,18 @@ Movie::eager('prices', $movies);
 		</tr>
 	</thead>
 	<tbody>
-		<? foreach ($movies as $movie): ?>
+		<? foreach ($movies as $movie):
+			$prices = array_values($movie->prices);
+			?>
 			<tr>
 				<td><?= html($movie->name) ?></td>
 				<td><a href="<?= $movie->full_url ?>"><?= html($movie->pathe_id) ?></a></td>
 				<td class="prices" data-value="<?= (array_values($movie->prices)[0]->price ?? 99) * 100 + 1000 ?>">
-					<? foreach (array_values($movie->prices) as $i => $price): ?>
+					<? foreach ($prices as $i => $price): ?>
 						<? if ($i == 0): ?>
-							<span class="current"><?= html_price(round($price->price)) ?></span>
+							<span class="<?= $price->price < ($prices[1]->price ?? 0) ? 'discount' : '' ?>">
+								<?= html_price(round($price->price)) ?>
+							</span>
 						<? else: ?>
 							<?= $i ? ' &lt;' : '' ?>
 							<?= html_price(round($price->price)) ?>

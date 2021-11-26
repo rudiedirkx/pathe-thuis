@@ -26,6 +26,13 @@ if (isset($_POST['source'])) {
 				'pathe_id' => $id,
 			]);
 		}
+		else {
+			unset($exist[$id]);
+		}
+	}
+
+	if (count($exist)) {
+		Movie::deleteAll(['pathe_id' => array_keys($exist)]);
 	}
 
 	return do_redirect('index');

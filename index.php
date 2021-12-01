@@ -63,12 +63,17 @@ Movie::eager('prices', $movies);
 				<td class="prices" data-value="<?= (array_values($movie->prices)[0]->price ?? 99) * 100 + 1000 ?>">
 					<? foreach ($prices as $i => $price): ?>
 						<? if ($i == 0): ?>
-							<span class="<?= $price->price < ($prices[1]->price ?? 0) ? 'discount' : '' ?>">
+							<span
+								class="<?= $price->price < ($prices[1]->price ?? 0) ? 'discount' : '' ?>"
+								title="Found: <?= date('d-m-Y', $price->first_fetch_on) ?>"
+							>
 								<?= html_price(round($price->price)) ?>
 							</span>
 						<? else: ?>
 							<?= $i ? ' &lt;' : '' ?>
-							<?= html_price(round($price->price)) ?>
+							<span title="Found: <?= date('d-m-Y', $price->first_fetch_on) ?>">
+								<?= html_price(round($price->price)) ?>
+							</span>
 						<? endif ?>
 					<? endforeach ?>
 				</td>

@@ -1,6 +1,7 @@
 <?php
 
 use GuzzleHttp\Client as Guzzle;
+use GuzzleHttp\Exception\BadResponseException;
 use rdx\pathethuis\Movie;
 use rdx\pathethuis\PriceChange;
 
@@ -10,16 +11,23 @@ $movies = Movie::all('1 ORDER BY name');
 
 $guzzle = new Guzzle();
 
-$unfound = 0;
+$warnings = 0;
 $updates = [];
 foreach ($movies as $movie) {
 	echo "$movie->name\n";
 
-	$rsp = $guzzle->get($movie->full_url);
-	$html = $rsp->getBody();
+	try {
+		$rsp = $guzzle->get($movie->full_url);
+		$html = $rsp->getBody();
+	}
+	catch (BadResponseException $ex) {
+		$warnings++;
+		echo "    RESPONSE CODE " . $ex->getResponse()->getStatusCode() . "!\n";
+		continue;
+	}
 
 	if (!preg_match('#"price":(\d+(?:\.\d+)?),#', $html, $match)) {
-		$unfound++;
+		$warnings++;
 		echo "    COULDN'T FIND PRICE!\n";
 		continue;
 	}
@@ -54,4 +62,4 @@ if (count($updates)) {
 	echo "\n- " . implode("\n- ", $updates) . "\n";
 }
 
-exit($unfound > 3 || count($updates) ? 1 : 0);
+exit($warnings > 3 || count($updates) ? 1 : 0);

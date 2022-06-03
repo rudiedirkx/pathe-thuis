@@ -28,6 +28,9 @@ header('Content-type: text/html; charset=utf-8');
 		text-align: left;
 		border-bottom: solid 2px #000;
 	}
+	th[data-sort]:after {
+		content: " \21F3";
+	}
 
 	.prices .discount {
 		font-weight: bold;

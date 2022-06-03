@@ -55,6 +55,7 @@ Movie::eager('prices', $movies);
 			<th>Name</th>
 			<th>ID</th>
 			<th data-sort>Price</th>
+			<th data-sort>Last checked</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -64,7 +65,7 @@ Movie::eager('prices', $movies);
 			<tr>
 				<td><?= html($movie->name) ?></td>
 				<td><a href="<?= $movie->full_url ?>"><?= html($movie->pathe_id) ?></a></td>
-				<td class="prices" data-value="<?= (array_values($movie->prices)[0]->price ?? 99) * 100 + 1000 ?>">
+				<td class="prices" data-value="<?= ($prices[0]->price ?? 99) * 100 + 1000 ?>">
 					<? foreach ($prices as $i => $price): ?>
 						<? if ($i == 0): ?>
 							<span
@@ -80,6 +81,9 @@ Movie::eager('prices', $movies);
 							</span>
 						<? endif ?>
 					<? endforeach ?>
+				</td>
+				<td data-value="<?= $prices[0]->last_fetch_on ?? 0 ?>">
+					<?= count($prices) ? date('Y-m-d', $prices[0]->last_fetch_on) : '' ?>
 				</td>
 			</tr>
 		<? endforeach ?>
@@ -97,12 +101,12 @@ Movie::eager('prices', $movies);
 </form>
 
 <script>
-document.querySelector('[data-sort]').addEventListener('click', function(e) {
+document.querySelectorAll('[data-sort]').forEach(el => el.addEventListener('click', function(e) {
 	const ci = this.cellIndex;
 	const tbody = this.closest('table').querySelector('tbody');
 	const rows = [...tbody.rows].sort((a, b) => a.cells[ci].dataset.value < b.cells[ci].dataset.value ? -1 : 1);
 	rows.forEach(tr => tbody.append(tr));
-});
+}));
 </script>
 <?php
 

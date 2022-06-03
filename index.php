@@ -14,6 +14,10 @@ if (isset($_POST['source'])) {
 
 	$items = $doc->queryAll('.vertical-poster-list__item');
 // var_dump(count($items));
+	if (($n = count($items)) < 2) {
+		exit("$n items in source");
+	}
+
 	foreach ($items as $item) {
 		$href = $item->query('a')['href'];
 		preg_match('#^/film/(\d+)/#', $href, $match);

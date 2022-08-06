@@ -1,42 +1,18 @@
 <?php
 
-use rdx\jsdom\Node;
 use rdx\pathethuis\Movie;
 
 require __DIR__ . '/inc.bootstrap.php';
 
-$movies = Movie::all('1 ORDER BY name');
+if (isset($_POST['html']) || isset($_POST['html'])) {
+	header('Access-Control-Allow-Private-Network: true');
+	header('Access-Control-Allow-Origin: https://www.pathe-thuis.nl');
 
-if (isset($_POST['source'])) {
-	$doc = Node::create($_POST['source']);
-	$exist = array_column($movies, 'name', 'pathe_id');
-// print_r($exist);
+	$items = isset($_POST['html']) ? Movie::htmlToMovies($_POST['html']) : json_decode($_POST['json'], true);
+	[$created, $deleted] = Movie::syncMovies($items);
 
-	$items = $doc->queryAll('.vertical-poster-list__item');
-// var_dump(count($items));
-	if (($n = count($items)) < 2) {
-		exit("$n items in source");
-	}
-
-	foreach ($items as $item) {
-		$href = $item->query('a')['href'];
-		preg_match('#^/film/(\d+)/#', $href, $match);
-		$id = $match[1];
-		$name = $item->query('.poster__caption')->textContent;
-// var_dump($id, $name);
-		if (!isset($exist[$id])) {
-			Movie::insert([
-				'name' => $name,
-				'pathe_id' => $id,
-			]);
-		}
-		else {
-			unset($exist[$id]);
-		}
-	}
-
-	if (count($exist)) {
-		Movie::deleteAll(['pathe_id' => array_keys($exist)]);
+	if (isset($_POST['ajax'])) {
+		exit("Created $created movies, and deleted $deleted.");
 	}
 
 	return do_redirect('index');
@@ -44,6 +20,7 @@ if (isset($_POST['source'])) {
 
 require 'tpl.header.php';
 
+$movies = Movie::all('1 ORDER BY name');
 Movie::eager('prices', $movies);
 
 ?>
@@ -92,13 +69,17 @@ Movie::eager('prices', $movies);
 
 <br>
 
-<form method="post" action>
-	<fieldset>
-		<legend>Sync watchlist</legend>
-		<p>Source HTML:<br><textarea name="source"></textarea></p>
+<fieldset>
+	<legend>Sync watchlist</legend>
+	<form method="post" action>
+		<p>Source HTML:<br><textarea name="html"></textarea></p>
 		<p><button>Sync</button></p>
-	</fieldset>
-</form>
+	</form>
+	<form method="post" action>
+		<p>JSON export:<br><textarea name="json"></textarea></p>
+		<p><button>Sync</button></p>
+	</form>
+</fieldset>
 
 <script>
 document.querySelectorAll('[data-sort]').forEach(el => el.addEventListener('click', function(e) {

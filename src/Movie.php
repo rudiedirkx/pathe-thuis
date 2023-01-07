@@ -65,7 +65,11 @@ class Movie extends Model {
 			}
 
 			if ($deleted = count($exist)) {
-				self::deleteAll(['pathe_id' => array_keys($exist)]);
+				self::updateAll([
+					'deleted' => 1,
+				], [
+					'pathe_id' => array_keys($exist),
+				]);
 			}
 // print_r(self::$_db->queries);
 // exit;

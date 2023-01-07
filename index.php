@@ -20,7 +20,7 @@ if (isset($_POST['html']) || isset($_POST['html'])) {
 
 require 'tpl.header.php';
 
-$movies = Movie::all('1 ORDER BY name');
+$movies = Movie::all("deleted = '0' ORDER BY name");
 Movie::eager('prices', $movies);
 
 ?>

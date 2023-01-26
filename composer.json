@@ -2,8 +2,8 @@
     "name": "rdx/pathe-thuis",
     "type": "project",
     "require": {
-        "rdx/db": "^1.20",
-        "rdx/js-dom": "^1.2",
+        "rdx/db": "^1.25",
+        "rdx/js-dom": "^1.6",
         "guzzlehttp/guzzle": "^7.4"
     },
     "autoload": {

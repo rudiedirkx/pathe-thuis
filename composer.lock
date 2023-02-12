@@ -583,16 +583,16 @@
         },
         {
             "name": "rdx/js-dom",
-            "version": "1.6",
+            "version": "1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rudiedirkx/php-js-dom.git",
-                "reference": "371fd2154116137808fe63627a59e787f07b39a9"
+                "reference": "10ae462d9824b6baa5eb76407692d5bb40f42513"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rudiedirkx/php-js-dom/zipball/371fd2154116137808fe63627a59e787f07b39a9",
-                "reference": "371fd2154116137808fe63627a59e787f07b39a9",
+                "url": "https://api.github.com/repos/rudiedirkx/php-js-dom/zipball/10ae462d9824b6baa5eb76407692d5bb40f42513",
+                "reference": "10ae462d9824b6baa5eb76407692d5bb40f42513",
                 "shasum": ""
             },
             "require": {
@@ -617,9 +617,9 @@
             "description": "JS-like DOM traversal",
             "support": {
                 "issues": "https://github.com/rudiedirkx/php-js-dom/issues",
-                "source": "https://github.com/rudiedirkx/php-js-dom/tree/1.6"
+                "source": "https://github.com/rudiedirkx/php-js-dom/tree/1.7"
             },
-            "time": "2023-01-16T16:51:19+00:00"
+            "time": "2023-01-27T00:25:33+00:00"
         },
         {
             "name": "symfony/css-selector",

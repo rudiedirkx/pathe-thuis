@@ -49,7 +49,7 @@ class Movie extends Model {
 		$movies = self::all('1 ORDER BY name');
 		$exist = array_column($movies, 'name', 'pathe_id');
 
-		self::$_db->transaction(function() use ($exist, $items) {
+		return self::$_db->transaction(function() use ($exist, $items) {
 			$created = 0;
 			foreach ($items as [$id, $name]) {
 				if (!isset($exist[$id])) {
@@ -75,8 +75,7 @@ class Movie extends Model {
 // exit;
 
 			return [$created, $deleted];
-		}, $context);
-		return $context['result'];
+		});
 	}
 
 }

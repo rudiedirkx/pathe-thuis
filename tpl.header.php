@@ -32,6 +32,10 @@ header('Content-type: text/html; charset=utf-8');
 		content: " \21F3";
 	}
 
+	tr.deleted {
+		color: red;
+	}
+
 	.prices .discount {
 		font-weight: bold;
 		color: green;

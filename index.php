@@ -20,7 +20,7 @@ if (isset($_POST['html']) || isset($_POST['html'])) {
 
 require 'tpl.header.php';
 
-$movies = Movie::all("deleted = '0' ORDER BY name");
+$movies = Movie::all("1=1 ORDER BY name");
 Movie::eager('prices', $movies);
 
 ?>
@@ -39,7 +39,7 @@ Movie::eager('prices', $movies);
 		<? foreach ($movies as $movie):
 			$prices = array_values($movie->prices);
 			?>
-			<tr>
+			<tr class="<?= $movie->deleted ? 'deleted' : '' ?>">
 				<td><?= html($movie->name) ?></td>
 				<td><a href="<?= $movie->full_url ?>"><?= html($movie->pathe_id) ?></a></td>
 				<td class="prices" data-value="<?= ($prices[0]->price ?? 99) * 100 + 1000 ?>">

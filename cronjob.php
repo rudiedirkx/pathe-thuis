@@ -7,7 +7,7 @@ use rdx\pathethuis\PriceChange;
 
 require __DIR__ . '/inc.bootstrap.php';
 
-$movies = Movie::all('1 ORDER BY name');
+$movies = Movie::all("deleted = '0' ORDER BY name");
 
 $guzzle = new Guzzle();
 

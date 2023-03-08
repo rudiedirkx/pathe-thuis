@@ -4,7 +4,7 @@ use rdx\pathethuis\Movie;
 
 require __DIR__ . '/inc.bootstrap.php';
 
-if (isset($_POST['html']) || isset($_POST['html'])) {
+if (isset($_POST['html']) || isset($_POST['json'])) {
 	header('Access-Control-Allow-Private-Network: true');
 	header('Access-Control-Allow-Origin: https://www.pathe-thuis.nl');
 
@@ -20,11 +20,17 @@ if (isset($_POST['html']) || isset($_POST['html'])) {
 
 require 'tpl.header.php';
 
-$movies = Movie::all("1=1 ORDER BY name");
+$deleted = isset($_GET['deleted']);
+$movies = Movie::all(($deleted ? '1=1' : "deleted = '0'") . " ORDER BY name");
 Movie::eager('prices', $movies);
 
+$numDeleted = $deleted ? 0 : Movie::count("deleted = '1'");
+
 ?>
-<h1>Movies</h1>
+<h1>Movies (<?= count($movies) ?>)</h1>
+<? if ($numDeleted): ?>
+	<p><a href="?deleted=1">+ <?= $numDeleted ?> deleted</a></p>
+<? endif ?>
 
 <table>
 	<thead>

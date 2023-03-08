@@ -46,7 +46,7 @@ class Movie extends Model {
 	}
 
 	static public function syncMovies(array $items) : array {
-		$movies = self::all('1 ORDER BY name');
+		$movies = self::all("deleted = '0' ORDER BY name");
 		$exist = array_column($movies, 'name', 'pathe_id');
 
 		return self::$_db->transaction(function() use ($exist, $items) {

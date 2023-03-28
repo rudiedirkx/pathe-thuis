@@ -23,6 +23,7 @@ header('Content-type: text/html; charset=utf-8');
 	th, td {
 		border: solid 1px #aaa;
 		padding: 4px 7px;
+		vertical-align: top;
 	}
 	th {
 		text-align: left;

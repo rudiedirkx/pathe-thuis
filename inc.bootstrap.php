@@ -9,4 +9,8 @@ $db = db_sqlite::open(array('database' => PATHE_DB_FILE));
 db_generic_model::$_db = $db;
 $db->ensureSchema(require 'inc.db-schema.php');
 
+session_start();
+
+$_SESSION['pathe_thuis_csrf'] ??= (string) rand();
+
 const PATHE_URL = 'https://www.pathe-thuis.nl/film/%s/%s';

@@ -18,6 +18,15 @@ if (isset($_POST['html']) || isset($_POST['json'])) {
 	return do_redirect('index');
 }
 
+if (isset($_GET['delete'], $_GET['_token']) && $_GET['_token'] === $_SESSION['pathe_thuis_csrf']) {
+	$movie = Movie::find($_GET['delete']);
+	if ($movie) {
+		$movie->update(['deleted' => 1]);
+	}
+
+	return do_redirect('index');
+}
+
 require 'tpl.header.php';
 
 $deleted = isset($_GET['deleted']);
@@ -39,6 +48,7 @@ $numDeleted = $deleted ? 0 : Movie::count("deleted = '1'");
 			<th>ID</th>
 			<th data-sort>Price</th>
 			<th data-sort>Last checked</th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -65,9 +75,10 @@ $numDeleted = $deleted ? 0 : Movie::count("deleted = '1'");
 						<? endif ?>
 					<? endforeach ?>
 				</td>
-				<td data-value="<?= $prices[0]->last_fetch_on ?? 0 ?>">
+				<td data-value="<?= $prices[0]->last_fetch_on ?? 0 ?>" nowrap>
 					<?= count($prices) ? date('Y-m-d', $prices[0]->last_fetch_on) : '' ?>
 				</td>
+				<td><a href="?delete=<?= $movie->id ?>&_token=<?= $_SESSION['pathe_thuis_csrf'] ?>">x</a></td>
 			</tr>
 		<? endforeach ?>
 	</tbody>

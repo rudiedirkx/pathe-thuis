@@ -56,7 +56,12 @@ $numDeleted = $deleted ? 0 : Movie::count("deleted = '1'");
 			$prices = array_values($movie->prices);
 			?>
 			<tr class="<?= $movie->deleted ? 'deleted' : '' ?>">
-				<td><?= html($movie->name) ?></td>
+				<td>
+					<?= html($movie->name) ?>
+					<? if ($movie->rating): ?>
+						★<?= number_format($movie->rating / 10, 1) ?>
+					<? endif ?>
+				</td>
 				<td><a href="<?= $movie->full_url ?>"><?= html($movie->pathe_id) ?></a></td>
 				<td class="prices" data-value="<?= ($prices[0]->price ?? 99) * 100 + 1000 ?>">
 					<? foreach ($prices as $i => $price): ?>

@@ -7,7 +7,7 @@ use rdx\pathethuis\PriceChange;
 
 require __DIR__ . '/inc.bootstrap.php';
 
-$movies = Movie::all("deleted = '0' ORDER BY name");
+$movies = Movie::all("deleted = '0' ORDER BY name ASC");
 
 $guzzle = new Guzzle();
 
@@ -33,6 +33,17 @@ foreach ($movies as $movie) {
 	}
 
 	$price = round($match[1], 2);
+// var_dump($price);
+
+	$rating = 0;
+	if (preg_match('#"ratingValue":"([\d\.]+)",#', $html, $match)) {
+		$rating = round($match[1] * 10);
+	}
+// var_dump($rating);
+
+	$movie->update([
+		'rating' => $rating,
+	]);
 
 	$change = $movie->last_price;
 	if (!$change || $change->price != $price) {

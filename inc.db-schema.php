@@ -1,12 +1,13 @@
 <?php
 
 return [
-	'version' => 3,
+	'version' => 4,
 	'tables' => [
 		'movies' => [
 			'id' => ['pk' => true],
 			'name',
 			'pathe_id',
+			'rating' => ['type' => 'int', 'default' => 0],
 			'deleted' => ['type' => 'int', 'default' => 0],
 		],
 		'price_changes' => [

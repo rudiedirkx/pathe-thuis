@@ -45,7 +45,8 @@ $numDeleted = $deleted ? 0 : Movie::count("deleted = '1'");
 	<thead>
 		<tr>
 			<th>Name</th>
-			<th>ID</th>
+			<th>Pathe</th>
+			<th>IMDB</th>
 			<th data-sort>Price</th>
 			<th data-sort>Last checked</th>
 			<th></th>
@@ -63,6 +64,11 @@ $numDeleted = $deleted ? 0 : Movie::count("deleted = '1'");
 					<? endif ?>
 				</td>
 				<td><a href="<?= $movie->full_url ?>"><?= html($movie->pathe_id) ?></a></td>
+				<td>
+					<?if ($movie->imdb_id): ?>
+						<a href="<?= $movie->imdb_url ?>"><?= html($movie->imdb_id) ?></a>
+					<? endif ?>
+				</td>
 				<td class="prices" data-value="<?= ($prices[0]->price ?? 99) * 100 + 1000 ?>">
 					<? foreach ($prices as $i => $price): ?>
 						<? if ($i == 0): ?>

@@ -41,8 +41,15 @@ foreach ($movies as $movie) {
 	}
 // var_dump($rating);
 
+	$imdb = 0;
+	if (preg_match('#"sameAs":"https://www.imdb.com/title/(tt\d{6,})/?",#', $html, $match)) {
+		$imdb = $match[1];
+	}
+// var_dump($imdb);
+
 	$movie->update([
 		'rating' => $rating,
+		'imdb_id' => $imdb,
 	]);
 
 	$change = $movie->last_price;

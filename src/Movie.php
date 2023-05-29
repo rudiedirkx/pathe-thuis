@@ -15,6 +15,10 @@ class Movie extends Model {
 		return sprintf(PATHE_URL, $this->pathe_id, 'x');
 	}
 
+	protected function get_imdb_url() {
+		return sprintf('https://www.imdb.com/title/%s/', $this->imdb_id);
+	}
+
 	protected function relate_prices() {
 		return $this->to_many(PriceChange::class, 'movie_id')
 			->order('id desc');

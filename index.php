@@ -44,6 +44,7 @@ $numDeleted = $deleted ? 0 : Movie::count("deleted = '1'");
 <table>
 	<thead>
 		<tr>
+			<th data-sort data-desc>★</th>
 			<th>Name</th>
 			<th>Pathe</th>
 			<th>IMDB</th>
@@ -57,12 +58,12 @@ $numDeleted = $deleted ? 0 : Movie::count("deleted = '1'");
 			$prices = array_values($movie->prices);
 			?>
 			<tr class="<?= $movie->deleted ? 'deleted' : '' ?>">
-				<td>
-					<?= html($movie->name) ?>
+				<td data-value="<?= 1000 + 10 * ($movie->rating ?: 0) ?>">
 					<? if ($movie->rating): ?>
-						★<?= number_format($movie->rating / 10, 1) ?>
+						<?= number_format($movie->rating / 10, 1) ?>
 					<? endif ?>
 				</td>
+				<td><?= html($movie->name) ?></td>
 				<td><a href="<?= $movie->full_url ?>"><?= html($movie->pathe_id) ?></a></td>
 				<td>
 					<?if ($movie->imdb_id): ?>
@@ -114,7 +115,7 @@ document.querySelectorAll('[data-sort]').forEach(el => el.addEventListener('clic
 	const ci = this.cellIndex;
 	const tbody = this.closest('table').querySelector('tbody');
 	const rows = [...tbody.rows].sort((a, b) => a.cells[ci].dataset.value < b.cells[ci].dataset.value ? -1 : 1);
-	rows.forEach(tr => tbody.append(tr));
+	(this.dataset.desc != null ? rows.reverse() : rows).forEach(tr => tbody.append(tr));
 }));
 </script>
 <?php

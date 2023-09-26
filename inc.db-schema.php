@@ -1,7 +1,7 @@
 <?php
 
 return [
-	'version' => 5,
+	'version' => 6,
 	'tables' => [
 		'movies' => [
 			'id' => ['pk' => true],
@@ -17,6 +17,11 @@ return [
 			'price' => ['type' => 'float'],
 			'first_fetch_on' => ['unsigned' => true, 'null' => false, 'default' => 0],
 			'last_fetch_on' => ['unsigned' => true, 'null' => false, 'default' => 0],
+		],
+		'imdb_watchlist' => [
+			'id' => ['pk' => true],
+			'date',
+			'count' => ['unsigned' => true, 'null' => false],
 		],
 	],
 ];

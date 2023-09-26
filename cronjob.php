@@ -2,10 +2,22 @@
 
 use GuzzleHttp\Client as Guzzle;
 use GuzzleHttp\Exception\BadResponseException;
+use rdx\imdb\AuthSession;
+use rdx\imdb\Client as Imdb;
 use rdx\pathethuis\Movie;
 use rdx\pathethuis\PriceChange;
 
 require __DIR__ . '/inc.bootstrap.php';
+
+if (IMDB_AT_MAIN && IMDB_UBID_MAIN) {
+	$imdb = new Imdb(new AuthSession(IMDB_AT_MAIN, IMDB_UBID_MAIN));
+	if ($imdb->logIn()) {
+		$db->insert('imdb_watchlist', [
+			'date' => date('Y-m-d'),
+			'count' => $imdb->watchlist->count,
+		]);
+	}
+}
 
 $movies = Movie::all("deleted = '0' ORDER BY name ASC");
 

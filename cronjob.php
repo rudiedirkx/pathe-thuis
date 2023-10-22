@@ -2,15 +2,12 @@
 
 use GuzzleHttp\Client as Guzzle;
 use GuzzleHttp\Exception\BadResponseException;
-use rdx\imdb\AuthSession;
-use rdx\imdb\Client as Imdb;
 use rdx\pathethuis\Movie;
 use rdx\pathethuis\PriceChange;
 
 require __DIR__ . '/inc.bootstrap.php';
 
-if (IMDB_AT_MAIN && IMDB_UBID_MAIN) {
-	$imdb = new Imdb(new AuthSession(IMDB_AT_MAIN, IMDB_UBID_MAIN));
+if ($imdb) {
 	if ($imdb->logIn()) {
 		$db->insert('imdb_watchlist', [
 			'date' => date('Y-m-d'),
@@ -53,15 +50,15 @@ foreach ($movies as $movie) {
 	}
 // var_dump($rating);
 
-	$imdb = 0;
+	$imdbId = 0;
 	if (preg_match('#"sameAs":"https://www.imdb.com/title/(tt\d{6,})/?",#', $html, $match)) {
-		$imdb = $match[1];
+		$imdbId = $match[1];
 	}
-// var_dump($imdb);
+// var_dump($imdbId);
 
 	$movie->update([
 		'rating' => $rating,
-		'imdb_id' => $imdb,
+		'imdb_id' => $imdbId,
 	]);
 
 	$change = $movie->last_price;

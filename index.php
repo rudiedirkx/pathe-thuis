@@ -37,9 +37,12 @@ $numDeleted = $deleted ? 0 : Movie::count("deleted = '1'");
 
 ?>
 <h1>Movies (<?= count($movies) ?>)</h1>
-<? if ($numDeleted): ?>
-	<p><a href="?deleted=1">+ <?= $numDeleted ?> deleted</a></p>
-<? endif ?>
+<p>
+	<a href="?deleted=1">+ <?= $numDeleted ?> deleted</a>
+	<? if ($imdb): ?>
+		| <a href="imdb-watchlist.php">IMDB watchlist</a>
+	<? endif ?>
+</p>
 
 <table>
 	<thead>

@@ -1,7 +1,7 @@
 <?php
 
 return [
-	'version' => 6,
+	'version' => 7,
 	'tables' => [
 		'movies' => [
 			'id' => ['pk' => true],
@@ -22,6 +22,7 @@ return [
 			'id' => ['pk' => true],
 			'date',
 			'count' => ['unsigned' => true, 'null' => false],
+			'seen' => ['unsigned' => true, 'null' => true, 'default' => null],
 		],
 	],
 ];

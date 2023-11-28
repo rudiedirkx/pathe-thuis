@@ -9,9 +9,11 @@ require __DIR__ . '/inc.bootstrap.php';
 
 if ($imdb) {
 	if ($imdb->logIn()) {
+		$ratings = $imdb->getTitleRatingsMeta();
 		$db->insert('imdb_watchlist', [
 			'date' => date('Y-m-d'),
 			'count' => $imdb->watchlist->count,
+			'seen' => $ratings->count ?? null,
 		]);
 	}
 }

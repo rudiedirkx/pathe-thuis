@@ -4,7 +4,7 @@ require __DIR__ . '/inc.bootstrap.php';
 
 require 'tpl.header.php';
 
-$counts = $db->select_fields('imdb_watchlist', 'date, count', '1=1');
+$counts = $db->select('imdb_watchlist', '1=1 order by date asc')->all();
 
 ?>
 <div id="chart"></div>
@@ -18,8 +18,10 @@ $counts = $db->select_fields('imdb_watchlist', 'date, count', '1=1');
 			valueFormatString: "DD-MM-'YY",
 		},
 		axisY: {
-			title: "Count",
-			minimum: <?= 100 * floor(max(0, min($counts) - 10) / 100) ?>,
+			title: "Watchlist",
+		},
+		axisY2: {
+			title: "Rated",
 		},
 		toolTip: {
 			enabled: false,
@@ -29,14 +31,31 @@ $counts = $db->select_fields('imdb_watchlist', 'date, count', '1=1');
 				name: "Watchlist",
 				type: "spline",
 				color: "green",
+				markerSize: 0,
 				showInLegend: false,
 				dataPoints: [
-					<? foreach ($counts as $date => $count): ?>
+					<? foreach ($counts as $info): ?>
 						{
-							x: new Date('<?= $date ?>'),
-							y: <?= $count ?>,
+							x: new Date('<?= $info->date ?>'),
+							y: <?= $info->count ?>,
 						},
 					<? endforeach ?>
+				],
+			},
+			{
+				name: "Rated",
+				axisYType: "secondary",
+				type: "spline",
+				color: "red",
+				markerSize: 0,
+				showInLegend: false,
+				dataPoints: [
+					<? foreach ($counts as $info): if ($info->seen): ?>
+						{
+							x: new Date('<?= $info->date ?>'),
+							y: <?= $info->seen ?>,
+						},
+					<? endif; endforeach ?>
 				],
 			},
 		],

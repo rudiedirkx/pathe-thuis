@@ -22,6 +22,8 @@ $movies = Movie::all("deleted = '0' ORDER BY name ASC");
 
 $guzzle = new Guzzle();
 
+echo PT_URL . "\n\n";
+
 $warnings = 0;
 $updates = [];
 foreach ($movies as $movie) {

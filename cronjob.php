@@ -1,5 +1,6 @@
 <?php
 
+use Exception;
 use GuzzleHttp\Client as Guzzle;
 use GuzzleHttp\Exception\BadResponseException;
 use rdx\pathethuis\Movie;
@@ -9,12 +10,17 @@ require __DIR__ . '/inc.bootstrap.php';
 
 if ($imdb) {
 	if ($imdb->logIn()) {
-		$ratings = $imdb->getTitleRatingsMeta();
-		$db->insert('imdb_watchlist', [
-			'date' => date('Y-m-d'),
-			'count' => $imdb->watchlist->count,
-			'seen' => $ratings->count ?? null,
-		]);
+		try {
+			$ratings = $imdb->getTitleRatingsMeta();
+			$db->insert('imdb_watchlist', [
+				'date' => date('Y-m-d'),
+				'count' => $imdb->watchlist->count,
+				'seen' => $ratings->count ?? null,
+			]);
+		}
+		catch (Exception $ex) {
+			// Ignore
+		}
 	}
 }
 

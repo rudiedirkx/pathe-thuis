@@ -1,6 +1,5 @@
 <?php
 
-use Exception;
 use GuzzleHttp\Client as Guzzle;
 use GuzzleHttp\Exception\BadResponseException;
 use rdx\pathethuis\Movie;
@@ -18,7 +17,7 @@ if ($imdb) {
 				'seen' => $ratings->count ?? null,
 			]);
 		}
-		catch (Exception $ex) {
+		catch (\Exception $ex) {
 			// Ignore
 		}
 	}

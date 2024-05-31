@@ -24,15 +24,15 @@ $counts = $db->select('imdb_watchlist', '1=1 order by date asc')->all();
 			title: "Rated",
 		},
 		toolTip: {
-			enabled: false,
+			enabled: true,
 		},
 		data: [
 			{
 				name: "Watchlist",
-				type: "spline",
+				type: "line",
 				color: "green",
 				markerSize: 0,
-				showInLegend: false,
+				showInLegend: true,
 				dataPoints: [
 					<? foreach ($counts as $info): ?>
 						{
@@ -45,10 +45,10 @@ $counts = $db->select('imdb_watchlist', '1=1 order by date asc')->all();
 			{
 				name: "Rated",
 				axisYType: "secondary",
-				type: "spline",
+				type: "line",
 				color: "red",
 				markerSize: 0,
-				showInLegend: false,
+				showInLegend: true,
 				dataPoints: [
 					<? foreach ($counts as $info): if ($info->seen): ?>
 						{

@@ -6,8 +6,25 @@ require 'tpl.header.php';
 
 $counts = $db->select('imdb_watchlist', '1=1 order by date asc')->all();
 
+$perMonthWatchlist = $perMonthSeen = [];
+foreach ($counts as $count) {
+	if (str_ends_with($count['date'], '-01')) {
+		$month = substr($count['date'], 0, 7);
+		if ($count['count']) $perMonthWatchlist[$month] ??= $count['count'];
+		if ($count['seen']) $perMonthSeen[$month] ??= $count['seen'];
+	}
+}
+foreach ([&$perMonthWatchlist, &$perMonthSeen] as &$arr) {
+	$arr = array_map(function(int $start, int $end) {
+		return $end - $start;
+	}, array_slice($arr, 0, -1), array_slice($arr, 1));
+	$arr = abs(round(array_sum($arr) / count($arr)));
+}
+
 ?>
-<div id="chart"></div>
+<div id="chart" style="width: 100%; aspect-ratio: 3/1"></div>
+
+<p>Watchlist: <?= $perMonthWatchlist ?> per month. Rated: <?= $perMonthSeen ?> per month.</p>
 
 <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
 <script>

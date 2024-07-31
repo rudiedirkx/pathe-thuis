@@ -11,8 +11,9 @@ if ($imdb) {
 	if ($imdb->logIn()) {
 		try {
 			$ratings = $imdb->getTitleRatingsMeta();
+			$date = date('Y-m-d', strtotime('-5 hours'));
 			$db->insert('imdb_watchlist', [
-				'date' => date('Y-m-d'),
+				'date' => $date,
 				'count' => $imdb->watchlist->count,
 				'seen' => $ratings->count ?? null,
 			]);

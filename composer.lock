@@ -8,22 +8,22 @@
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
-            "version": "7.8.0",
+            "version": "7.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "1110f66a6530a40fe7aea0378fe608ee2b2248f9"
+                "reference": "d281ed313b989f213357e3be1a179f02196ac99b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/1110f66a6530a40fe7aea0378fe608ee2b2248f9",
-                "reference": "1110f66a6530a40fe7aea0378fe608ee2b2248f9",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/d281ed313b989f213357e3be1a179f02196ac99b",
+                "reference": "d281ed313b989f213357e3be1a179f02196ac99b",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "guzzlehttp/promises": "^1.5.3 || ^2.0.1",
-                "guzzlehttp/psr7": "^1.9.1 || ^2.5.1",
+                "guzzlehttp/promises": "^1.5.3 || ^2.0.3",
+                "guzzlehttp/psr7": "^2.7.0",
                 "php": "^7.2.5 || ^8.0",
                 "psr/http-client": "^1.0",
                 "symfony/deprecation-contracts": "^2.2 || ^3.0"
@@ -32,11 +32,11 @@
                 "psr/http-client-implementation": "1.0"
             },
             "require-dev": {
-                "bamarni/composer-bin-plugin": "^1.8.1",
+                "bamarni/composer-bin-plugin": "^1.8.2",
                 "ext-curl": "*",
-                "php-http/client-integration-tests": "dev-master#2c025848417c1135031fdf9c728ee53d0a7ceaee as 3.0.999",
+                "guzzle/client-integration-tests": "3.0.2",
                 "php-http/message-factory": "^1.1",
-                "phpunit/phpunit": "^8.5.29 || ^9.5.23",
+                "phpunit/phpunit": "^8.5.39 || ^9.6.20",
                 "psr/log": "^1.1 || ^2.0 || ^3.0"
             },
             "suggest": {
@@ -114,7 +114,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.8.0"
+                "source": "https://github.com/guzzle/guzzle/tree/7.9.2"
             },
             "funding": [
                 {
@@ -130,28 +130,28 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-08-27T10:20:53+00:00"
+            "time": "2024-07-24T11:22:20+00:00"
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "2.0.1",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "111166291a0f8130081195ac4556a5587d7f1b5d"
+                "reference": "f9c436286ab2892c7db7be8c8da4ef61ccf7b455"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/111166291a0f8130081195ac4556a5587d7f1b5d",
-                "reference": "111166291a0f8130081195ac4556a5587d7f1b5d",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/f9c436286ab2892c7db7be8c8da4ef61ccf7b455",
+                "reference": "f9c436286ab2892c7db7be8c8da4ef61ccf7b455",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2.5 || ^8.0"
             },
             "require-dev": {
-                "bamarni/composer-bin-plugin": "^1.8.1",
-                "phpunit/phpunit": "^8.5.29 || ^9.5.23"
+                "bamarni/composer-bin-plugin": "^1.8.2",
+                "phpunit/phpunit": "^8.5.39 || ^9.6.20"
             },
             "type": "library",
             "extra": {
@@ -197,7 +197,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/promises/issues",
-                "source": "https://github.com/guzzle/promises/tree/2.0.1"
+                "source": "https://github.com/guzzle/promises/tree/2.0.4"
             },
             "funding": [
                 {
@@ -213,20 +213,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-08-03T15:11:55+00:00"
+            "time": "2024-10-17T10:06:22+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.6.1",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "be45764272e8873c72dbe3d2edcfdfcc3bc9f727"
+                "reference": "a70f5c95fb43bc83f07c9c948baa0dc1829bf201"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/be45764272e8873c72dbe3d2edcfdfcc3bc9f727",
-                "reference": "be45764272e8873c72dbe3d2edcfdfcc3bc9f727",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/a70f5c95fb43bc83f07c9c948baa0dc1829bf201",
+                "reference": "a70f5c95fb43bc83f07c9c948baa0dc1829bf201",
                 "shasum": ""
             },
             "require": {
@@ -240,9 +240,9 @@
                 "psr/http-message-implementation": "1.0"
             },
             "require-dev": {
-                "bamarni/composer-bin-plugin": "^1.8.1",
-                "http-interop/http-factory-tests": "^0.9",
-                "phpunit/phpunit": "^8.5.29 || ^9.5.23"
+                "bamarni/composer-bin-plugin": "^1.8.2",
+                "http-interop/http-factory-tests": "0.9.0",
+                "phpunit/phpunit": "^8.5.39 || ^9.6.20"
             },
             "suggest": {
                 "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
@@ -313,7 +313,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.6.1"
+                "source": "https://github.com/guzzle/psr7/tree/2.7.0"
             },
             "funding": [
                 {
@@ -329,7 +329,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-08-27T10:13:57+00:00"
+            "time": "2024-07-18T11:15:46+00:00"
         },
         {
             "name": "psr/http-client",
@@ -385,20 +385,20 @@
         },
         {
             "name": "psr/http-factory",
-            "version": "1.0.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-factory.git",
-                "reference": "e616d01114759c4c489f93b099585439f795fe35"
+                "reference": "2b4765fddfe3b508ac62f829e852b1501d3f6e8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/e616d01114759c4c489f93b099585439f795fe35",
-                "reference": "e616d01114759c4c489f93b099585439f795fe35",
+                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/2b4765fddfe3b508ac62f829e852b1501d3f6e8a",
+                "reference": "2b4765fddfe3b508ac62f829e852b1501d3f6e8a",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.0.0",
+                "php": ">=7.1",
                 "psr/http-message": "^1.0 || ^2.0"
             },
             "type": "library",
@@ -422,7 +422,7 @@
                     "homepage": "https://www.php-fig.org/"
                 }
             ],
-            "description": "Common interfaces for PSR-7 HTTP message factories",
+            "description": "PSR-17: Common interfaces for PSR-7 HTTP message factories",
             "keywords": [
                 "factory",
                 "http",
@@ -434,9 +434,9 @@
                 "response"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-factory/tree/1.0.2"
+                "source": "https://github.com/php-fig/http-factory"
             },
-            "time": "2023-04-10T20:10:41+00:00"
+            "time": "2024-04-15T12:06:14+00:00"
         },
         {
             "name": "psr/http-message",
@@ -537,16 +537,16 @@
         },
         {
             "name": "rdx/db",
-            "version": "1.25",
+            "version": "1.26",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rudiedirkx/db_generic.git",
-                "reference": "e4dd4b6026b5baf643c71e6d54038af03654d80d"
+                "reference": "043643621a7c8ba35cd7d808afdb3f1551132bfc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rudiedirkx/db_generic/zipball/e4dd4b6026b5baf643c71e6d54038af03654d80d",
-                "reference": "e4dd4b6026b5baf643c71e6d54038af03654d80d",
+                "url": "https://api.github.com/repos/rudiedirkx/db_generic/zipball/043643621a7c8ba35cd7d808afdb3f1551132bfc",
+                "reference": "043643621a7c8ba35cd7d808afdb3f1551132bfc",
                 "shasum": ""
             },
             "type": "library",
@@ -571,9 +571,9 @@
             "description": "Simple MySQL/SQLite wrapper",
             "support": {
                 "issues": "https://github.com/rudiedirkx/db_generic/issues",
-                "source": "https://github.com/rudiedirkx/db_generic/tree/1.25"
+                "source": "https://github.com/rudiedirkx/db_generic/tree/1.26"
             },
-            "time": "2022-09-21T21:49:08+00:00"
+            "time": "2024-11-05T14:24:51+00:00"
         },
         {
             "name": "rdx/imdb-user-api",
@@ -581,18 +581,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/rudiedirkx/imdb-api-client.git",
-                "reference": "85bce13fe0b942431b33f4d6d34976d3160052e4"
+                "reference": "85a68bc673f705c5e54c359a219f508cf161ba50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rudiedirkx/imdb-api-client/zipball/85bce13fe0b942431b33f4d6d34976d3160052e4",
-                "reference": "85bce13fe0b942431b33f4d6d34976d3160052e4",
+                "url": "https://api.github.com/repos/rudiedirkx/imdb-api-client/zipball/85a68bc673f705c5e54c359a219f508cf161ba50",
+                "reference": "85a68bc673f705c5e54c359a219f508cf161ba50",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "^7.4",
                 "php": ">=8.0",
                 "rdx/js-dom": "^1.3"
+            },
+            "require-dev": {
+                "symfony/var-dumper": "^7.2"
             },
             "default-branch": true,
             "type": "library",
@@ -616,24 +619,24 @@
                 "issues": "https://github.com/rudiedirkx/imdb-api-client/issues",
                 "source": "https://github.com/rudiedirkx/imdb-api-client/tree/master"
             },
-            "time": "2024-05-13T21:22:02+00:00"
+            "time": "2025-01-10T13:37:32+00:00"
         },
         {
             "name": "rdx/js-dom",
-            "version": "1.8",
+            "version": "1.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rudiedirkx/php-js-dom.git",
-                "reference": "21e0c5e83c2e77ae775dc3222b998e08a80cd4c9"
+                "reference": "fc4afe5b2c4a8b7c150ae932abed90ffb7fce5b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rudiedirkx/php-js-dom/zipball/21e0c5e83c2e77ae775dc3222b998e08a80cd4c9",
-                "reference": "21e0c5e83c2e77ae775dc3222b998e08a80cd4c9",
+                "url": "https://api.github.com/repos/rudiedirkx/php-js-dom/zipball/fc4afe5b2c4a8b7c150ae932abed90ffb7fce5b6",
+                "reference": "fc4afe5b2c4a8b7c150ae932abed90ffb7fce5b6",
                 "shasum": ""
             },
             "require": {
-                "symfony/css-selector": "^3.1 || ^4.0 || ^5.0 || ^6.0"
+                "symfony/css-selector": "^4.0 || ^5.0 || ^6.0 || ^7.0"
             },
             "type": "library",
             "autoload": {
@@ -654,26 +657,26 @@
             "description": "JS-like DOM traversal",
             "support": {
                 "issues": "https://github.com/rudiedirkx/php-js-dom/issues",
-                "source": "https://github.com/rudiedirkx/php-js-dom/tree/1.8"
+                "source": "https://github.com/rudiedirkx/php-js-dom/tree/1.11"
             },
-            "time": "2023-05-25T12:19:32+00:00"
+            "time": "2024-12-19T16:05:54+00:00"
         },
         {
             "name": "symfony/css-selector",
-            "version": "v6.3.2",
+            "version": "v7.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "883d961421ab1709877c10ac99451632a3d6fa57"
+                "reference": "601a5ce9aaad7bf10797e3663faefce9e26c24e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/883d961421ab1709877c10ac99451632a3d6fa57",
-                "reference": "883d961421ab1709877c10ac99451632a3d6fa57",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/601a5ce9aaad7bf10797e3663faefce9e26c24e2",
+                "reference": "601a5ce9aaad7bf10797e3663faefce9e26c24e2",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1"
+                "php": ">=8.2"
             },
             "type": "library",
             "autoload": {
@@ -705,7 +708,7 @@
             "description": "Converts CSS selectors to XPath expressions",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/css-selector/tree/v6.3.2"
+                "source": "https://github.com/symfony/css-selector/tree/v7.2.0"
             },
             "funding": [
                 {
@@ -721,20 +724,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-07-12T16:00:22+00:00"
+            "time": "2024-09-25T14:21:43+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
-            "version": "v3.3.0",
+            "version": "v3.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/deprecation-contracts.git",
-                "reference": "7c3aff79d10325257a001fcf92d991f24fc967cf"
+                "reference": "74c71c939a79f7d5bf3c1ce9f5ea37ba0114c6f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/7c3aff79d10325257a001fcf92d991f24fc967cf",
-                "reference": "7c3aff79d10325257a001fcf92d991f24fc967cf",
+                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/74c71c939a79f7d5bf3c1ce9f5ea37ba0114c6f6",
+                "reference": "74c71c939a79f7d5bf3c1ce9f5ea37ba0114c6f6",
                 "shasum": ""
             },
             "require": {
@@ -742,12 +745,12 @@
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-main": "3.4-dev"
-                },
                 "thanks": {
-                    "name": "symfony/contracts",
-                    "url": "https://github.com/symfony/contracts"
+                    "url": "https://github.com/symfony/contracts",
+                    "name": "symfony/contracts"
+                },
+                "branch-alias": {
+                    "dev-main": "3.5-dev"
                 }
             },
             "autoload": {
@@ -772,7 +775,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.3.0"
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.5.1"
             },
             "funding": [
                 {
@@ -788,7 +791,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-05-23T14:45:45+00:00"
+            "time": "2024-09-25T14:20:29+00:00"
         }
     ],
     "packages-dev": [],
@@ -799,7 +802,7 @@
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }

@@ -15,6 +15,13 @@
             "rdx\\pathethuis\\": "src/"
         }
     },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "platform": {
+            "php": "8.1.1"
+        }
+    },
     "authors": [
         {
             "name": "Rudie Dirkx",

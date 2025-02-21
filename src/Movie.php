@@ -30,7 +30,7 @@ class Movie extends Model {
 	}
 
 	static public function htmlToMovies(string $html) : array {
-		$doc = Node::create($_POST['html']);
+		$doc = Node::create($_POST['html'], 'utf-8');
 		$elements = $doc->queryAll('.vertical-poster-list__item');
 
 		if (($n = count($elements)) < self::MIN_ITEMS_IN_HTML) {

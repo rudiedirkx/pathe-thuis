@@ -7,6 +7,8 @@ use rdx\pathethuis\PriceChange;
 
 require __DIR__ . '/inc.bootstrap.php';
 
+$warnings = 0;
+
 if ($imdb) {
 	if ($imdb->logIn()) {
 		try {
@@ -19,7 +21,8 @@ if ($imdb) {
 			]);
 		}
 		catch (\Exception $ex) {
-			// Ignore
+			$warnings++;
+			echo "IMDB watchlist ERROR: " . $ex->getMessage() . "\n\n";
 		}
 	}
 }
@@ -30,7 +33,6 @@ $guzzle = new Guzzle();
 
 echo PT_URL . "\n\n";
 
-$warnings = 0;
 $updates = [];
 foreach ($movies as $movie) {
 	echo "$movie->name\n";

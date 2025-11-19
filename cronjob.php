@@ -13,17 +13,24 @@ if ($imdb) {
 	if ($imdb->logIn()) {
 		try {
 			$ratings = $imdb->getTitleRatingsMeta();
-			$date = date('Y-m-d', strtotime('-5 hours'));
-			$db->insert('imdb_watchlist', [
-				'date' => $date,
-				'count' => $imdb->watchlist->count,
-				'seen' => $ratings->count ?? null,
-			]);
 		}
 		catch (\Exception $ex) {
+			$ratings = null;
 			$warnings++;
-			echo "IMDB watchlist ERROR: " . $ex->getMessage() . "\n\n";
+			echo "IMDB ratings ERROR: " . $ex->getMessage() . "\n\n";
 		}
+
+		$date = date('Y-m-d', strtotime('-5 hours'));
+		$db->delete('imdb_watchlist', ['date' => $date]);
+		$db->insert('imdb_watchlist', [
+			'date' => $date,
+			'count' => $imdb->watchlist->count,
+			'seen' => $ratings->count ?? null,
+		]);
+	}
+	else {
+		$warnings = 100;
+		echo "IMDB watchlist ERROR: not logged in\n\n";
 	}
 }
 

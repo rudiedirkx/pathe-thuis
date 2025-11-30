@@ -6,6 +6,19 @@ require 'tpl.header.php';
 
 $counts = $db->select('imdb_watchlist', '1=1 order by date asc')->all();
 
+$onlyWeekly = function(array $in) : array {
+	if (count($in) < 500) {
+		return $in;
+	}
+
+	$chunks = array_column(array_chunk($in, 7), 0);
+	if (end($chunks) != end($in)) {
+		$chunks[] = end($in);
+	}
+
+	return $chunks;
+};
+
 $perMonthWatchlist = $perMonthSeen = [];
 foreach ($counts as $count) {
 	if (str_ends_with($count['date'], '-01')) {
@@ -51,10 +64,10 @@ foreach ([&$perMonthWatchlist, &$perMonthSeen] as &$arr) {
 				markerSize: 0,
 				showInLegend: true,
 				dataPoints: [
-					<? foreach ($counts as $info): ?>
+					<? foreach ($onlyWeekly($counts) as $info): ?>
 						{
 							x: new Date('<?= $info->date ?>'),
-							y: <?= $info->count ?>,
+							y: <?= (int) $info->count ?>,
 						},
 					<? endforeach ?>
 				],
@@ -67,12 +80,12 @@ foreach ([&$perMonthWatchlist, &$perMonthSeen] as &$arr) {
 				markerSize: 0,
 				showInLegend: true,
 				dataPoints: [
-					<? foreach ($counts as $info): if ($info->seen): ?>
+					<? foreach ($onlyWeekly(array_filter($counts, fn($info) => $info->seen)) as $info): ?>
 						{
 							x: new Date('<?= $info->date ?>'),
-							y: <?= $info->seen ?>,
+							y: <?= (int) $info->seen ?>,
 						},
-					<? endif; endforeach ?>
+					<? endforeach ?>
 				],
 			},
 		],

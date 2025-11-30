@@ -22,6 +22,10 @@ if ($imdb) {
 
 		$date = date('Y-m-d', strtotime('-5 hours'));
 		$db->delete('imdb_watchlist', ['date' => $date]);
+		echo 'watchlist: ';
+		var_dump($imdb->watchlist->count);
+		echo 'ratings: ';
+		var_dump($ratings->count ?? null);
 		$db->insert('imdb_watchlist', [
 			'date' => $date,
 			'count' => $imdb->watchlist->count,

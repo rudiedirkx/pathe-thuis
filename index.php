@@ -21,7 +21,7 @@ if (isset($_POST['html']) || isset($_POST['json'])) {
 if (isset($_GET['delete'], $_GET['_token']) && $_GET['_token'] === $_SESSION['pathe_thuis_csrf']) {
 	$movie = Movie::find($_GET['delete']);
 	if ($movie) {
-		$movie->update(['deleted' => 1]);
+		$movie->update(['deleted' => !$movie->deleted]);
 	}
 
 	return do_redirect('index');

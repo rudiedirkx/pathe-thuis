@@ -21,44 +21,49 @@ $onlyWeekly = function(array $in) : array {
 
 $perMonthWatchlist = $perMonthSeen = [];
 foreach ($counts as $count) {
-	if (str_ends_with($count['date'], '-01')) {
-		$month = substr($count['date'], 0, 7);
-		if ($count['count']) $perMonthWatchlist[$month] ??= $count['count'];
-		if ($count['seen']) $perMonthSeen[$month] ??= $count['seen'];
+	$month = substr($count['date'], 0, 7);
+	if ($count['count']) $perMonthWatchlist[$month] ??= $count['count'];
+	if ($count['seen']) $perMonthSeen[$month] ??= $count['seen'];
+}
+// dump($perMonthWatchlist, $perMonthSeen);
+
+foreach ([&$perMonthWatchlist, &$perMonthSeen] as $i => &$in) {
+	$out = [];
+	foreach ($in as $month => $num) {
+		$nextMonth = date('Y-m', strtotime('+1 month', strtotime("$month-01")));
+		if (isset($in[$nextMonth])) {
+			$out[$month] = ($in[$nextMonth] - $num) * ($i == 0 ? -1 : 1);
+		}
 	}
+	$in = $out;
 }
-foreach ([&$perMonthWatchlist, &$perMonthSeen] as &$arr) {
-	$arr = array_map(function(int $start, int $end) {
-		return $end - $start;
-	}, array_slice($arr, 0, -1), array_slice($arr, 1));
-	$arr = abs(round(array_sum($arr) / count($arr)));
-}
+// dump($perMonthWatchlist, $perMonthSeen);
 
 ?>
-<div id="chart" style="width: 100%; aspect-ratio: 3/1"></div>
-
-<p>Watchlist: <?= $perMonthWatchlist ?> per month. Rated: <?= $perMonthSeen ?> per month.</p>
+<div id="chart1" style="width: 100%; aspect-ratio: 3/1"></div>
+<br><hr><br>
+<div id="chart2" style="width: 100%; aspect-ratio: 3/1"></div>
 
 <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
 <script>
 (function() {
-	const chart = new CanvasJS.Chart("chart", {
+	const chart1 = new CanvasJS.Chart("chart1", {
 		animationEnabled: false,
 		axisX: {
 			valueFormatString: "DD-MM-'YY",
 		},
 		axisY: {
-			title: "Watchlist",
+			title: "Watchlist (absolute)",
 		},
 		axisY2: {
-			title: "Rated",
+			title: "Rated (absolute)",
 		},
 		toolTip: {
 			enabled: true,
 		},
 		data: [
 			{
-				name: "Watchlist",
+				name: "Watchlist (absolute)",
 				type: "line",
 				color: "green",
 				markerSize: 0,
@@ -73,7 +78,7 @@ foreach ([&$perMonthWatchlist, &$perMonthSeen] as &$arr) {
 				],
 			},
 			{
-				name: "Rated",
+				name: "Rated (absolute)",
 				axisYType: "secondary",
 				type: "line",
 				color: "red",
@@ -90,6 +95,56 @@ foreach ([&$perMonthWatchlist, &$perMonthSeen] as &$arr) {
 			},
 		],
 	});
-	chart.render();
+	chart1.render();
+
+	const chart2 = new CanvasJS.Chart("chart2", {
+		animationEnabled: false,
+		axisX: {
+			valueFormatString: "DD-MM-'YY",
+		},
+		axisY: {
+			title: "Watchlist (change/month)",
+		},
+		axisY2: {
+			title: "Rated (change/month)",
+		},
+		toolTip: {
+			enabled: true,
+		},
+		data: [
+			{
+				name: "Watchlist (change/month)",
+				type: "spline",
+				color: "green",
+				markerSize: 0,
+				showInLegend: true,
+				dataPoints: [
+					<? foreach ($perMonthWatchlist as $month => $num): ?>
+						{
+							x: new Date('<?= $month ?>-01'),
+							y: <?= (int) $num ?>,
+						},
+					<? endforeach ?>
+				],
+			},
+			{
+				name: "Rated (change/month)",
+				axisYType: "secondary",
+				type: "spline",
+				color: "red",
+				markerSize: 0,
+				showInLegend: true,
+				dataPoints: [
+					<? foreach ($perMonthSeen as $month => $num): ?>
+						{
+							x: new Date('<?= $month ?>-01'),
+							y: <?= (int) $num ?>,
+						},
+					<? endforeach ?>
+				],
+			},
+		],
+	});
+	chart2.render();
 })();
 </script>

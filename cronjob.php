@@ -12,7 +12,7 @@ $warnings = 0;
 if ($imdb) {
 	if ($imdb->logIn()) {
 		try {
-			$ratings = $imdb->getTitleRatingsMeta();
+			$ratings = $imdb->getRatedTitlesMeta();
 		}
 		catch (\Exception $ex) {
 			$ratings = null;

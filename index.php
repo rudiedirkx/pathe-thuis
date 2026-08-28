@@ -15,7 +15,7 @@ if (isset($_POST['html']) || isset($_POST['json'])) {
 		exit("Created $created movies, and deleted $deleted.");
 	}
 
-	return do_redirect('index');
+	do_redirect('index');
 }
 
 if (isset($_GET['delete'], $_GET['_token']) && $_GET['_token'] === $_SESSION['pathe_thuis_csrf']) {
@@ -24,7 +24,7 @@ if (isset($_GET['delete'], $_GET['_token']) && $_GET['_token'] === $_SESSION['pa
 		$movie->update(['deleted' => !$movie->deleted]);
 	}
 
-	return do_redirect('index');
+	do_redirect('index');
 }
 
 require 'tpl.header.php';
@@ -39,7 +39,7 @@ $numDeleted = $deleted ? 0 : Movie::count("deleted = '1'");
 <h1>Movies (<?= count($movies) ?>)</h1>
 <p>
 	<a href="?deleted=1">+ <?= $numDeleted ?> deleted</a>
-	<? if ($imdb): ?>
+	<? if (imdb()): ?>
 		| <a href="imdb-watchlist.php">IMDB watchlist</a>
 	<? endif ?>
 </p>
@@ -83,7 +83,7 @@ $numDeleted = $deleted ? 0 : Movie::count("deleted = '1'");
 								<?= html_price(round($price->price)) ?>
 							</span>
 						<? else: ?>
-							<?= $i ? ' &lt;' : '' ?>
+							&lt;
 							<span title="Found: <?= date('d-m-Y', $price->first_fetch_on) ?>">
 								<?= html_price(round($price->price)) ?>
 							</span>

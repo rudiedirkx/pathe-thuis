@@ -11,11 +11,11 @@ class Movie extends Model {
 
 	static $_table = 'movies';
 
-	protected function get_full_url() {
+	protected function get_full_url() : string {
 		return sprintf(PATHE_URL, $this->pathe_id, 'x');
 	}
 
-	protected function get_imdb_url() {
+	protected function get_imdb_url() : string {
 		return sprintf('https://www.imdb.com/title/%s/', $this->imdb_id);
 	}
 
@@ -29,6 +29,9 @@ class Movie extends Model {
 			->where('id in (select max(id) from price_changes group by movie_id)');
 	}
 
+	/**
+	 * @return list<array{string, string}>
+	 */
 	static public function htmlToMovies(string $html) : array {
 		$doc = Node::create($_POST['html'], 'utf-8');
 		$elements = $doc->queryAll('.vertical-poster-list__item');
@@ -39,7 +42,9 @@ class Movie extends Model {
 
 		$items = [];
 		foreach ($elements as $element) {
-			$href = $element->query('a')['href'];
+			$a = $element->query('a');
+			if (!$a) continue;
+			$href = $a['href'];
 			preg_match('#^/film/(\d+)/#', $href, $match);
 			$id = $match[1];
 			$name = $element->query('.poster__caption')->textContent;
@@ -49,6 +54,10 @@ class Movie extends Model {
 		return $items;
 	}
 
+	/**
+	 * @param list<array{string, string}> $items
+	 * @return array{int, int}
+	 */
 	static public function syncMovies(array $items) : array {
 		$movies = self::all("deleted = '0' ORDER BY name");
 		$exist = array_column($movies, 'name', 'pathe_id');

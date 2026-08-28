@@ -4,7 +4,7 @@ require __DIR__ . '/inc.bootstrap.php';
 
 require 'tpl.header.php';
 
-$counts = $db->select('imdb_watchlist', '1=1 order by date asc')->all();
+$counts = db()->select('imdb_watchlist', '1=1 order by date asc');
 
 $onlyWeekly = function(array $in) : array {
 	if (count($in) < 500) {
@@ -21,9 +21,9 @@ $onlyWeekly = function(array $in) : array {
 
 $perMonthWatchlist = $perMonthSeen = [];
 foreach ($counts as $count) {
-	$month = substr($count['date'], 0, 7);
-	if ($count['count']) $perMonthWatchlist[$month] ??= $count['count'];
-	if ($count['seen']) $perMonthSeen[$month] ??= $count['seen'];
+	$month = substr($count->date, 0, 7);
+	if ($count->count) $perMonthWatchlist[$month] ??= $count->count;
+	if ($count->seen) $perMonthSeen[$month] ??= $count->seen;
 }
 // dump($perMonthWatchlist, $perMonthSeen);
 

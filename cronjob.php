@@ -9,10 +9,10 @@ require __DIR__ . '/inc.bootstrap.php';
 
 $warnings = 0;
 
-if ($imdb) {
-	if ($imdb->logIn()) {
+if (imdb()) {
+	if (imdb()->logIn()) {
 		try {
-			$ratings = $imdb->getRatedTitlesMeta();
+			$ratings = imdb()->getRatedTitlesMeta();
 		}
 		catch (\Exception $ex) {
 			$ratings = null;
@@ -21,14 +21,14 @@ if ($imdb) {
 		}
 
 		$date = date('Y-m-d', strtotime('-5 hours'));
-		$db->delete('imdb_watchlist', ['date' => $date]);
+		db()->delete('imdb_watchlist', ['date' => $date]);
 		echo 'watchlist: ';
-		var_dump($imdb->watchlist->count);
+		var_dump(imdb()->watchlist->count);
 		echo 'ratings: ';
 		var_dump($ratings->count ?? null);
-		$db->insert('imdb_watchlist', [
+		db()->insert('imdb_watchlist', [
 			'date' => $date,
-			'count' => $imdb->watchlist->count,
+			'count' => imdb()->watchlist->count,
 			'seen' => $ratings->count ?? null,
 		]);
 	}
@@ -64,12 +64,12 @@ foreach ($movies as $movie) {
 		continue;
 	}
 
-	$price = round($match[1], 2);
+	$price = round((float) $match[1], 2);
 // var_dump($price);
 
 	$rating = 0;
 	if (preg_match('#"ratingValue":"([\d\.]+)",#', $html, $match)) {
-		$rating = round($match[1] * 10);
+		$rating = round((float) $match[1] * 10);
 	}
 // var_dump($rating);
 
